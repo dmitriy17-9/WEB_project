@@ -49,7 +49,7 @@ def add_books():
     db_sess.add(book)
 
     book = Book()
-    book.name = 'Бегущий в лабиринте. Испытание огнем'
+    book.name = 'Испытание огнем'
     book.author = 'Джеймс Дэшнер'
     book.genre_id = 1
     os.chdir('../pdf')

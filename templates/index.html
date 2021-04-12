@@ -1,8 +1,13 @@
 {% extends "base.html" %}
 
 {% block content %}
-<h1>Books</h1>
+<h1>Доступные сейчас книги</h1>
+{% for item in books%}
 <div class="col-md6 border rounded">
-    <h2>Book</h2>
+    <h2>{{item.name}}</h2>
+    <div>
+        Автор: {{item.author}}
+    </div>
 </div>
+{% endfor %}
 {% endblock %}
