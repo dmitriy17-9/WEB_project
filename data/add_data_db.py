@@ -15,6 +15,7 @@ def add_admin():
     admin.about = 'Админ сайта Library.net'
     admin.email = 'admin-library@library.ru'
     admin.set_password('adminl1')
+    admin.position = 'admin'
     db_sess.add(admin)
 
     db_sess.commit()
