@@ -21,6 +21,10 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
+    """
+    Главная страница библиотеки Library.net
+    :return:
+    """
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
     return render_template("index.html", books=books, title='Library.net')
@@ -28,6 +32,10 @@ def index():
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
+    """
+    Регистрация
+    :return:
+    """
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
@@ -54,6 +62,10 @@ def reqister():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """
+    Авторизация
+    :return:
+    """
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
@@ -70,6 +82,7 @@ def login():
 @app.route('/logout')
 @login_required
 def logout():
+    """Выход из профиля"""
     logout_user()
     return redirect("/")
 

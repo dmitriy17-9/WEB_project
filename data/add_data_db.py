@@ -8,6 +8,10 @@ from data.users import User
 
 
 def add_admin():
+    """
+    Добавление админа
+    :return:
+    """
     db_sess = db_session.create_session()
 
     admin = User()
@@ -22,6 +26,10 @@ def add_admin():
 
 
 def add_genres():
+    """
+    Добавление жанров
+    :return:
+    """
     db_sess = db_session.create_session()
     db_sess.add_all([
         Genre(name='Фантастика'),
@@ -38,6 +46,10 @@ def add_genres():
 
 
 def add_books():
+    """
+    Добавление книг
+    :return:
+    """
     db_sess = db_session.create_session()
 
     book = Book()
