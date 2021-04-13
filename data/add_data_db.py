@@ -7,6 +7,19 @@ from data.genres import Genre
 from data.users import User
 
 
+def add_admin():
+    db_sess = db_session.create_session()
+
+    admin = User()
+    admin.name = 'Admin'
+    admin.about = 'Админ сайта Library.net'
+    admin.email = 'admin-library@library.ru'
+    admin.set_password('adminl1')
+    db_sess.add(admin)
+
+    db_sess.commit()
+
+
 def add_genres():
     db_sess = db_session.create_session()
     db_sess.add_all([
@@ -20,18 +33,6 @@ def add_genres():
         Genre(name='Ужасы и мистика'),
         Genre(name='Проза')
     ])
-    db_sess.commit()
-
-
-def add_admin():
-    db_sess = db_session.create_session()
-
-    admin = User()
-    admin.name = 'Admin'
-    admin.about = 'Админ сайта Library.net'
-    admin.email = 'admin-library@library.ru'
-    db_sess.add(admin)
-
     db_sess.commit()
 
 
