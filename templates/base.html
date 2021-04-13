@@ -15,8 +15,12 @@
 <header>
     <nav class="navbar navbar-light bg-light">
         <h1 class="img_library">Library.net</h1>
+        <a class="btn" href="/">Главная</a>
+        <a class="btn" href="/books">Все книги</a>
+        <a class="btn" href="/users">Пользователи</a>
+        <a class="btn" href="/genres">Жанры книг</a>
         {% if current_user.is_authenticated %}
-        <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
+            <a class="navbar-brand" href="/logout">{{ current_user.name }}</a>
         {% else %}
         <p>
             <a class="btn btn-primary " href="/register">Зарегистрироваться</a>

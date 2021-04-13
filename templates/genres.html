@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1>Все жанры</h1>
+{% for item in genres%}
+  <h3>{{loop.index}}. {{item.name}}</h3>
+{% endfor %}
+{% endblock %}

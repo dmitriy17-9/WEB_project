@@ -1,7 +1,10 @@
+import random
+
 from flask import Flask, render_template, redirect
 from data import db_session
 from data.add_data_db import add_genres, add_admin, add_books
 from data.books import Book
+from data.genres import Genre
 from data.users import User
 from forms.user import RegisterForm, LoginForm
 from flask_login import LoginManager, login_user, login_required, logout_user
@@ -27,7 +30,10 @@ def index():
     """
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
-    return render_template("index.html", books=books, title='Library.net')
+    if len(books) > 5:
+        return render_template("index.html", books=random.choices(books, k=5), title='Library.net')
+    else:
+        return render_template("index.html", books=random.choices(books, k=len(books)), title='Library.net')
 
 
 @app.route('/register', methods=['GET', 'POST'])
@@ -85,6 +91,39 @@ def logout():
     """Выход из профиля"""
     logout_user()
     return redirect("/")
+
+
+@app.route("/books")
+def books():
+    """
+    Список книг
+    :return:
+    """
+    db_sess = db_session.create_session()
+    books = db_sess.query(Book).all()
+    return render_template("books.html", books=books, title='Список книг')
+
+
+@app.route("/users")
+def users():
+    """
+    Список пользователей
+    :return:
+    """
+    db_sess = db_session.create_session()
+    users = db_sess.query(User).all()
+    return render_template("users.html", users=users, title='Список пользователей')
+
+
+@app.route("/genres")
+def genres():
+    """
+    Список жанров
+    :return:
+    """
+    db_sess = db_session.create_session()
+    genres = db_sess.query(Genre).all()
+    return render_template("genres.html", genres=genres, title='Список жанров')
 
 
 def main():

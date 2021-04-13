@@ -2,3 +2,11 @@ h1.img_library {
    background: url("/static/img/icon.png") no-repeat;
    padding-left: 40pt;
 }
+
+a.btn {
+   font-size: large;
+}
+
+h1 {
+   alignment: middle
+}
