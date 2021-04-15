@@ -3,10 +3,10 @@ h1.img_library {
    padding-left: 40pt;
 }
 
-a.btn {
-   font-size: large;
+a.navbar-brand {
+   font-size: xx-large;
 }
 
 h1 {
-   alignment: middle
+   text-align: center
 }

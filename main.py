@@ -24,24 +24,19 @@ def load_user(user_id):
 
 @app.route("/")
 def index():
-    """
-    Главная страница библиотеки Library.net
-    :return:
-    """
+    """Главная страница библиотеки Library.net"""
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
-    if len(books) > 5:
-        return render_template("index.html", books=random.choices(books, k=5), title='Library.net')
+    books2 = db_sess.query(Book).all()
+    if len(books) > 4:
+        return render_template("index.html", books=random.choices(books, k=4), title='Library.net')
     else:
         return render_template("index.html", books=random.choices(books, k=len(books)), title='Library.net')
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def reqister():
-    """
-    Регистрация
-    :return:
-    """
+    """Регистрация"""
     form = RegisterForm()
     if form.validate_on_submit():
         if form.password.data != form.password_again.data:
@@ -68,10 +63,7 @@ def reqister():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
-    """
-    Авторизация
-    :return:
-    """
+    """ Авторизация"""
     form = LoginForm()
     if form.validate_on_submit():
         db_sess = db_session.create_session()
@@ -95,10 +87,7 @@ def logout():
 
 @app.route("/books")
 def books():
-    """
-    Список книг
-    :return:
-    """
+    """Список книг"""
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
     return render_template("books.html", books=books, title='Список книг')
@@ -106,10 +95,7 @@ def books():
 
 @app.route("/users")
 def users():
-    """
-    Список пользователей
-    :return:
-    """
+    """Список пользователей """
     db_sess = db_session.create_session()
     users = db_sess.query(User).all()
     return render_template("users.html", users=users, title='Список пользователей')
@@ -117,13 +103,16 @@ def users():
 
 @app.route("/genres")
 def genres():
-    """
-    Список жанров
-    :return:
-    """
+    """Список жанров"""
     db_sess = db_session.create_session()
     genres = db_sess.query(Genre).all()
     return render_template("genres.html", genres=genres, title='Список жанров')
+
+
+@app.route('/my_profile')
+def my_profile():
+    """Страница своего профиля"""
+    return render_template("my_profile.html", tutle='Мой профиль')
 
 
 def main():

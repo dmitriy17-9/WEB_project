@@ -73,5 +73,3 @@ def add_books():
     db_sess.add(book)
 
     db_sess.commit()
-
-
