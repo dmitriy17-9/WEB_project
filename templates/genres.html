@@ -2,6 +2,35 @@
 
 {% block content %}
 <h1>Все жанры</h1>
+{% if current_user.is_authenticated and current_user.id == 1%}
+    <p>
+      <a class="btn btn-success" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
+         aria-expanded="false" aria-controls="multiCollapseExample1">Добавить жанр</a>
+    </p>
+    <div class="row">
+      <div class="col">
+        <div class="collapse multi-collapse" id="multiCollapseExample1">
+          <div class="card card-body">
+            <h3>Добавление жанра</h3>
+            <form action="" method="post">
+                {{ form.hidden_tag() }}
+                <p>
+                    {{ form.name.label }}<br>
+                    {{ form.name(class="form-control") }}<br>
+                    {% for error in form.name.errors %}
+                        <p class="alert alert-danger" role="alert">
+                            {{ error }}
+                        </p>
+                    {% endfor %}
+                </p>
+                <p>{{ form.submit(type="submit", class="btn btn-primary") }}</p>
+                {{message}}
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+{% endif %}
 {% for item in genres%}
   <h3>{{loop.index}}. {{item.name}}</h3>
 {% endfor %}

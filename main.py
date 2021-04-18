@@ -6,6 +6,7 @@ from data.add_data_db import add_genres, add_admin, add_books
 from data.books import Book
 from data.genres import Genre
 from data.users import User
+from forms.genres import GenresForm
 from forms.user import RegisterForm, LoginForm, EditForm
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
@@ -100,15 +101,24 @@ def users():
     return render_template("users.html", users=users, title='Список пользователей')
 
 
-@app.route("/genres")
+@app.route("/genres", methods=['GET', 'POST'])
 def genres():
     """Список жанров"""
     db_sess = db_session.create_session()
     genres = db_sess.query(Genre).all()
-    return render_template("genres.html", genres=genres, title='Список жанров')
+    form = GenresForm()
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        genre = Genre()
+        genre.name = form.name.data
+        db_sess.add(genre)
+        db_sess.commit()
+        return redirect('/')
+    return render_template("genres.html", genres=genres, title='Список жанров', form=form)
 
 
 @app.route('/my_profile', methods=['GET', 'POST'])
+@login_required
 def my_profile():
     """Страница своего профиля"""
     form = EditForm()
