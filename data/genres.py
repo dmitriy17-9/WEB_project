@@ -4,9 +4,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Genre(SqlAlchemyBase):
-    """
-    Модель Жанры
-    """
+    """Модель Жанры"""
     __tablename__ = 'genres'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

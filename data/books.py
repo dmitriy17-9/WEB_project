@@ -4,9 +4,7 @@ from .db_session import SqlAlchemyBase
 
 
 class Book(SqlAlchemyBase):
-    """
-    Модель Книги
-    """
+    """Модель Книги"""
     __tablename__ = 'books'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

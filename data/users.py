@@ -7,9 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 
 class User(SqlAlchemyBase, UserMixin):
-    """
-    Модель Пользователи
-    """
+    """Модель Пользователи"""
     __tablename__ = 'users'
 
     id = sqlalchemy.Column(sqlalchemy.Integer,

@@ -2,12 +2,23 @@
 
 {% block content %}
 <h1>Все доступные книги</h1>
-{% for item in books%}
-<div class="col-md6 border rounded">
-    <h2>{{item.name}}</h2>
-    <div>
-        Автор: {{item.author}}
+<div class="card-deck">
+    {% for item in books%}
+    <div class="card text-center" style="width: 18rem;">
+        <img class="card-img-top" src="static/img/The_Maze_Runner.png" alt="Card image cap">
+        <div class="card-body">
+            <h5 class="card-title">{{item.name}}</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Автор: {{item.author}}</h6>
+            <p class="card-text">Жанр: {{item.genre_id}}</p>
+            {% if current_user.is_authenticated %}
+                <a href="#" class="btn btn-primary">Скачать книгу</a>
+            {% else %}
+                <button type="button" class="btn btn-lg btn-outline-danger" disabled>
+                    Войдите на сайт, чтобы скачать книгу
+                </button>
+            {% endif %}
+        </div>
     </div>
+    {% endfor %}
 </div>
-{% endfor %}
 {% endblock %}

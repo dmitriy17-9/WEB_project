@@ -1,13 +1,13 @@
 import random
 
-from flask import Flask, render_template, redirect
+from flask import Flask, render_template, redirect, request, abort
 from data import db_session
 from data.add_data_db import add_genres, add_admin, add_books
 from data.books import Book
 from data.genres import Genre
 from data.users import User
-from forms.user import RegisterForm, LoginForm
-from flask_login import LoginManager, login_user, login_required, logout_user
+from forms.user import RegisterForm, LoginForm, EditForm
+from flask_login import LoginManager, login_user, login_required, logout_user, current_user
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
@@ -27,7 +27,6 @@ def index():
     """Главная страница библиотеки Library.net"""
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
-    books2 = db_sess.query(Book).all()
     if len(books) > 4:
         return render_template("index.html", books=random.choices(books, k=4), title='Library.net')
     else:
@@ -109,10 +108,31 @@ def genres():
     return render_template("genres.html", genres=genres, title='Список жанров')
 
 
-@app.route('/my_profile')
+@app.route('/my_profile', methods=['GET', 'POST'])
 def my_profile():
     """Страница своего профиля"""
-    return render_template("my_profile.html", tutle='Мой профиль')
+    form = EditForm()
+    if request.method == "GET":
+        db_sess = db_session.create_session()
+        me = db_sess.query(User).filter(User.id == current_user.id).first()
+        if me:
+            form.name.data = me.name
+            form.about.data = me.about
+        else:
+            abort(404)
+    if form.validate_on_submit():
+        db_sess = db_session.create_session()
+        user = db_sess.query(User).filter(User.id == current_user.id).first()
+        if user:
+            user.name = form.name.data
+            user.about = form.about.data
+            db_sess.commit()
+            return redirect('/')
+        else:
+            abort(404)
+    return render_template("my_profile.html",
+                           tutle='Мой профиль',
+                           form=form)
 
 
 def main():
