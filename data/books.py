@@ -11,8 +11,8 @@ class Book(SqlAlchemyBase):
                            primary_key=True, autoincrement=True)  # айди
     name = sqlalchemy.Column(sqlalchemy.String, nullable=True)  # название
     author = sqlalchemy.Column(sqlalchemy.String, nullable=True)  # автор
-    genre_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("genres.name"), nullable=True)  # жанр
-    file = sqlalchemy.Column(sqlalchemy.LargeBinary, nullable=True)  # файл книги
-    cover = sqlalchemy.Column(sqlalchemy.LargeBinary, nullable=True)  # обложки
+    genre_id = sqlalchemy.Column(sqlalchemy.Integer, sqlalchemy.ForeignKey("genres.id"))  # жанр
+    file = sqlalchemy.Column(sqlalchemy.String, nullable=True)  # файл
+    cover = sqlalchemy.Column(sqlalchemy.String, nullable=True)  # обложки
 
     genre = orm.relation("Genre")

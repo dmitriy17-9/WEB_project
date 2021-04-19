@@ -5,7 +5,10 @@
 {% if current_user.is_authenticated and current_user.id == 1%}
     <p>
       <a class="btn btn-success" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
-         aria-expanded="false" aria-controls="multiCollapseExample1">Добавить жанр</a>
+         aria-expanded="false" aria-controls="multiCollapseExample1" id="liveToastBtn">Добавить жанр</a>
+<!--      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" -->
+<!--          data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
+<!--          Добавить жанр</button>-->
     </p>
     <div class="row">
       <div class="col">

@@ -1,4 +1,5 @@
 import random
+from pickle import loads
 
 from flask import Flask, render_template, redirect, request, abort
 from data import db_session
@@ -29,9 +30,13 @@ def index():
     db_sess = db_session.create_session()
     books = db_sess.query(Book).all()
     if len(books) > 4:
-        return render_template("index.html", books=random.choices(books, k=4), title='Library.net')
+        return render_template("index.html",
+                               books=random.choices(books, k=4),
+                               title='Library.net')
     else:
-        return render_template("index.html", books=random.choices(books, k=len(books)), title='Library.net')
+        return render_template("index.html",
+                               books=random.choices(books, k=len(books)),
+                               title='Library.net')
 
 
 @app.route('/register', methods=['GET', 'POST'])

@@ -1,4 +1,5 @@
 import os
+from pickle import dumps
 
 from data import db_session
 from data.books import Book
@@ -56,20 +57,16 @@ def add_books():
     book.name = 'Бегущий в лабиринте'
     book.author = 'Джеймс Дэшнер'
     book.genre_id = 1
-    os.chdir('static/pdf')
-    book.file = convert_to_binary('The_Maze_Runner.pdf')
-    os.chdir('../img')
-    book.cover = convert_to_binary('The_Maze_Runner.png')
+    book.file = 'static/pdf/The_Maze_Runner.pdf'
+    book.cover = 'static/img/The_Maze_Runner.png'
     db_sess.add(book)
 
     book = Book()
     book.name = 'Испытание огнем'
     book.author = 'Джеймс Дэшнер'
     book.genre_id = 1
-    os.chdir('../pdf')
-    book.file = convert_to_binary('The_Scorch_Trials.pdf')
-    os.chdir('../img')
-    book.cover = convert_to_binary('The_Maze_Runner.png')
+    book.file = 'static/pdf/The_Scorch_Trials.pdf'
+    book.cover = 'static/img/The_Maze_Runner.png'
     db_sess.add(book)
 
     db_sess.commit()
