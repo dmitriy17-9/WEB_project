@@ -1,9 +1,11 @@
 import sqlalchemy
 from sqlalchemy import orm
+from sqlalchemy_serializer import SerializerMixin
+
 from .db_session import SqlAlchemyBase
 
 
-class Book(SqlAlchemyBase):
+class Book(SqlAlchemyBase, SerializerMixin):
     """Модель Книги"""
     __tablename__ = 'books'
 

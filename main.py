@@ -1,8 +1,7 @@
 import random
-from pickle import loads
 
-from flask import Flask, render_template, redirect, request, abort
-from data import db_session
+from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
+from data import db_session, books_api, genres_api
 from data.add_data_db import add_genres, add_admin, add_books
 from data.books import Book
 from data.genres import Genre
@@ -150,6 +149,11 @@ def my_profile():
                            form=form)
 
 
+@app.errorhandler(404)
+def not_found(error):
+    return make_response(jsonify({'error': 'Not found'}), 404)
+
+
 def main():
     db_session.global_init("db/library.db")
 
@@ -157,6 +161,8 @@ def main():
     # add_admin()
     # add_books()
 
+    app.register_blueprint(books_api.blueprint)
+    app.register_blueprint(genres_api.blueprint)
     app.run(port=8080, host='127.0.0.1')
 
 

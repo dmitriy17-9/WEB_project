@@ -3,7 +3,6 @@ from pickle import dumps
 
 from data import db_session
 from data.books import Book
-from data.convert_to_binary import convert_to_binary
 from data.genres import Genre
 from data.users import User
 
@@ -33,15 +32,17 @@ def add_genres():
     """
     db_sess = db_session.create_session()
     db_sess.add_all([
-        Genre(name='Фантастика'),
-        Genre(name='Фэнтези'),
-        Genre(name='Детективы'),
-        Genre(name='Приключения'),
-        Genre(name='Любовные романы'),
-        Genre(name='Наука и образование'),
-        Genre(name='Справочники и энциклопедии'),
-        Genre(name='Ужасы и мистика'),
-        Genre(name='Проза')
+        Genre(name='Фантастика', is_for_kids=False),
+        Genre(name='Фэнтези', is_for_kids=False),
+        Genre(name='Детективы', is_for_kids=False),
+        Genre(name='Приключения', is_for_kids=False),
+        Genre(name='Любовные романы', is_for_kids=False),
+        Genre(name='Наука и образование', is_for_kids=True),
+        Genre(name='Справочники и энциклопедии', is_for_kids=True),
+        Genre(name='Ужасы и мистика', is_for_kids=False),
+        Genre(name='Проза', is_for_kids=True),
+        Genre(name='Стихотворение', is_for_kids=True),
+        Genre(name='Сказка', is_for_kids=True)
     ])
     db_sess.commit()
 
