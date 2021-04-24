@@ -1,6 +1,9 @@
+import os
 import random
 
 from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
+from waitress import serve
+
 from data import db_session, books_api, genres_api, users_api, genres_resources, users_resources, books_resources
 from data.add_data_db import add_genres, add_admin, add_books, add_users
 from data.books import Book
@@ -176,7 +179,9 @@ def main():
     app.register_blueprint(books_api.blueprint)
     app.register_blueprint(genres_api.blueprint)
     app.register_blueprint(users_api.blueprint)
-    app.run(port=8080, host='127.0.0.1')
+
+    port = int(os.environ.get('PORT', 5000))
+    serve(app, port=port, host="0.0.0.0")
 
 
 if __name__ == '__main__':
