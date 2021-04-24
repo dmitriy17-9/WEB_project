@@ -74,6 +74,22 @@ def add_books():
     book.cover = 'static/img/Shinel.png'
     db_sess.add(book)
 
+    book = Book()
+    book.name = 'Герой нашего времени'
+    book.author = 'М. И. Лермонтов'
+    book.genre_id = 6
+    book.file = 'static/pdf/Geroi_nashego_vremeni.pdf'
+    book.cover = 'static/img/Geroi_nashego_vremeni.png'
+    db_sess.add(book)
+
+    book = Book()
+    book.name = 'Книга джунглей'
+    book.author = 'Редьярд Киплинг'
+    book.genre_id = 6
+    book.file = 'static/pdf/Kniga_djingley.pdf'
+    book.cover = 'static/img/Kniga_djingley.png'
+    db_sess.add(book)
+
     db_sess.commit()
 
 
