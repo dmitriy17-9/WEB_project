@@ -15,14 +15,14 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
 
 api = Api(app)
-# для списка объектов
 api.add_resource(genres_resources.GenresListResource, '/api/v2/genres')
-api.add_resource(users_resources.UsersListResource, '/api/v2/users')
-api.add_resource(books_resources.BooksListResource, '/api/v2/books')
-# для одного объекта
 api.add_resource(genres_resources.GenresResource, '/api/v2/genres/<int:genres_id>')
-api.add_resource(users_resources.UserResource, '/api/v2/users/<int:users_id>')
+
+api.add_resource(books_resources.BooksListResource, '/api/v2/books')
 api.add_resource(books_resources.BooksResource, '/api/v2/books/<int:books_id>')
+
+api.add_resource(users_resources.UsersListResource, '/api/v2/users')
+api.add_resource(users_resources.UserResource, '/api/v2/users/<int:users_id>')
 
 login_manager = LoginManager()
 login_manager.init_app(app)
