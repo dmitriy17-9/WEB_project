@@ -1,6 +1,7 @@
 flask
 flask_wtf
 flask_login
+flask_restful
 sqlalchemy
 sqlalchemy_serializer
 waitress
