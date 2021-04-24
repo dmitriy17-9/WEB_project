@@ -1,7 +1,7 @@
 import random
 
 from flask import Flask, render_template, redirect, request, abort, make_response, jsonify
-from data import db_session, books_api, genres_api, users_api
+from data import db_session, books_api, genres_api, users_api, genres_resources, users_resources, books_resources
 from data.add_data_db import add_genres, add_admin, add_books, add_users
 from data.books import Book
 from data.genres import Genre
@@ -9,9 +9,20 @@ from data.users import User
 from forms.genres import GenresForm
 from forms.user import RegisterForm, LoginForm, EditForm
 from flask_login import LoginManager, login_user, login_required, logout_user, current_user
+from flask_restful import abort, Api
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'yandexlyceum_secret_key'
+
+api = Api(app)
+# для списка объектов
+api.add_resource(genres_resources.GenresListResource, '/api/v2/genres')
+api.add_resource(users_resources.UsersListResource, '/api/v2/users')
+api.add_resource(books_resources.BooksListResource, '/api/v2/books')
+# для одного объекта
+api.add_resource(genres_resources.GenresResource, '/api/v2/genres/<int:genres_id>')
+api.add_resource(users_resources.UserResource, '/api/v2/users/<int:users_id>')
+api.add_resource(books_resources.BooksResource, '/api/v2/books/<int:books_id>')
 
 login_manager = LoginManager()
 login_manager.init_app(app)

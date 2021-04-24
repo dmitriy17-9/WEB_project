@@ -6,9 +6,6 @@
     <p>
       <a class="btn btn-success" data-bs-toggle="collapse" href="#multiCollapseExample1" role="button"
          aria-expanded="false" aria-controls="multiCollapseExample1" id="liveToastBtn">Добавить жанр</a>
-<!--      <button class="btn btn-primary" type="button" data-bs-toggle="collapse" -->
-<!--          data-bs-target="#collapseExample" aria-expanded="false" aria-controls="collapseExample">-->
-<!--          Добавить жанр</button>-->
     </p>
     <div class="row">
       <div class="col">
@@ -35,6 +32,6 @@
     </div>
 {% endif %}
 {% for item in genres%}
-  <h3>{{loop.index}}. {{item.name}}</h3>
+  <h4>{{loop.index}}. {{item.name}}</h4>
 {% endfor %}
 {% endblock %}
