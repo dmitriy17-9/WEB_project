@@ -58,6 +58,22 @@ def add_books():
     book.cover = 'static/img/The_Maze_Runner.png'
     db_sess.add(book)
 
+    book = Book()
+    book.name = 'Муму'
+    book.author = 'И. С. Тургенев'
+    book.genre_id = 6
+    book.file = 'static/pdf/Mumu.pdf'
+    book.cover = 'static/img/Mumu.png'
+    db_sess.add(book)
+
+    book = Book()
+    book.name = 'Шинель'
+    book.author = 'Н. В. Гоголь'
+    book.genre_id = 6
+    book.file = 'static/pdf/Shinel.pdf'
+    book.cover = 'static/img/Shinel.png'
+    db_sess.add(book)
+
     db_sess.commit()
 
 
